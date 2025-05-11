@@ -1,0 +1,11 @@
+.kakao-login-button {
+    width: 298px;
+    height: 99px;
+    background: var(--kakao-bg, #fee500);
+    color: black;
+}
+
+.kakao-logo {
+    width: 22px;
+    height: 22px;
+}
