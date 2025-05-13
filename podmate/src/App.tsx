@@ -9,7 +9,7 @@ function App() {
             <div className="mobile-frame">
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/oauth/redirect " element={<OAuthRedirect />} />
+                        <Route path="/oauth/redirect" element={<OAuthRedirect />} />
                         <Route path="/" element={<LoginPage />} />
                     </Routes>
                 </BrowserRouter>
