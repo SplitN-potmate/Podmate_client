@@ -12,20 +12,15 @@ export default function LoginPage() {
         }
     };
 
-    // const kakaoLoginHandler = () => {
-    //     try {
-    //         window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${restApiKey}&redirect_uri=${redirectURL}`;
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
-
     return (
-        <>
+        <div className="login-container">
+            <div className="logo-container">
+                <p>PodMate</p>
+            </div>
             <button className="kakao-login-button" onClick={kakaoLoginHandler}>
                 <img src="/login/kakaologo.png" className="kakao-logo" />
                 카카오 로그인
             </button>
-        </>
+        </div>
     );
 }
