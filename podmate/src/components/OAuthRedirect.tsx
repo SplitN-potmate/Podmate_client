@@ -11,11 +11,12 @@ export default function OAuthRedirect() {
             localStorage.setItem('accessToken', accessToken);
             localStorage.setItem('refreshToken', refreshToken);
 
-            alert('로그인 성공!');
-            window.location.href = '/onboarding'; // 추가정보 입력 페이지로 이동
+            // alert('로그인 성공!');
+            window.location.href = '/main';
+            //메인페이지로 이동
         } else {
             alert('로그인 실패…');
-            window.location.href = '/';
+            window.location.href = '/login';
         }
     }, []);
 
