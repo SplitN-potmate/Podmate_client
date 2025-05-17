@@ -1,5 +1,4 @@
 import './loginPage.css';
-import React from 'react';
 
 export default function LoginPage() {
     // const restApiKey = import.meta.env.VITE_RESTAPI_KEY;
