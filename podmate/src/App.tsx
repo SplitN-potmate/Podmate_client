@@ -4,7 +4,7 @@ import LoginPage from './pages/LoginPage';
 import OAuthRedirect from './components/OAuthRedirect';
 import Home from './pages/Home';
 import NavigationBar from './components/NavigationBar';
-import MyPage from './pages/Mypage';
+import MyPage from './pages/MyPage';
 
 const BackGround = styled.div`
     margin: 0;
