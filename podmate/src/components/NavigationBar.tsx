@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useNavigate, useLocation } from 'react-router-dom';
+import './navigationBar.css';
 
 const NavContainer = styled.nav`
-    position: fixed;
+    /* position: fixed;
     bottom: 60px;
     left: 0;
     right: 0;
@@ -13,6 +14,18 @@ const NavContainer = styled.nav`
     display: flex;
     justify-content: center;
     position: relative;
+    align-items: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000; */
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-48%);
+    height: 60px;
+    width: 390px; // 고정 모바일 프레임 크기
+    background-color: white;
+    display: flex;
+    justify-content: center;
     align-items: center;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
@@ -56,7 +69,7 @@ const NavigationBar = (): React.ReactElement => {
 
     const navItems = [
         { path: '/main', label: '홈', icon: '🏠' },
-        { path: '/register', label: '등록', icon: '➕' },
+        { path: '/register', label: '등록', icon: <img src="/navigator/registerIcon.png" className="register_icon" /> },
         { path: '/mypage', label: '마이페이지', icon: '🙎‍♂️' },
     ];
 
