@@ -1,0 +1,227 @@
+.podRegister_total_div {
+    margin: 0 20px;
+    width: 350px;
+    padding-bottom: 280px;
+}
+
+.podRegister_podNameQ {
+    font-size: 16px;
+    font-weight: 500;
+}
+.podRegister_input {
+    border-radius: 4px;
+    background-color: white;
+    border: 1px solid #52d4e0;
+    width: 340px;
+    height: 48px;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.podRegister_select {
+    border-radius: 4px;
+    background-color: white;
+    border: 1px solid #52d4e0;
+    width: 346px;
+    height: 54px;
+    font-size: 14px;
+}
+
+.react-datepicker-wrapper {
+    width: 100%;
+}
+
+.react-datepicker-ignore-onclickoutside {
+    width: 340px;
+    height: 48px;
+    background-color: white;
+    border: 1px solid #52d4e0;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.react-datepicker-popper {
+    width: 100%;
+    z-index: 100;
+}
+
+.react-datepicker__input-container input {
+    width: 340px;
+    height: 52px;
+    background-color: white;
+    border: 1px solid #52d4e0;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.react-datepicker {
+    width: 340px;
+    margin: 0 20px;
+    z-index: 100;
+}
+
+.react-datepicker__header {
+    background-color: white;
+    width: 340px;
+    border-bottom: none !important;
+}
+
+.react-datepicker__day-name {
+    font-weight: 600;
+}
+
+.react-datepicker__day--selected {
+    width: 40px;
+    height: 30px;
+    border-radius: 0.3em;
+    background-color: #52d4e0 !important;
+    color: white !important;
+}
+
+.podRegister_meetPlace_button {
+    width: 346px;
+    height: 40px;
+    background-color: #52d4e0;
+    border: 1px solid #52d4e0;
+    border-radius: 4px;
+    color: white;
+    margin-top: 2px;
+}
+
+.podRegister_ste1_complete_button_active,
+.podRegister_ste1_complete_button {
+    width: 346px;
+    height: 46px;
+    background-color: #52d4e0;
+    color: white;
+    font-size: 14px;
+    border: 1px solid #52d4e0;
+    border-radius: 4px;
+    margin-top: 60px;
+}
+
+.podRegister_ste1_complete_button {
+    background-color: #e3e7e8;
+    color: #919da1;
+    border: 1px solid #e3e7e8;
+}
+
+.podRegister_step2_pod_div {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 8px;
+    margin-top: 42px;
+}
+
+.podRegister_step2_podName {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 120%;
+    margin: 0;
+    margin-right: 5px;
+}
+
+.podRegister_step2_platform {
+    color: #52d4e0;
+    font-size: 16px;
+    margin: 0;
+    font-weight: 500;
+}
+
+.podRegister_step2_icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.podRegister_step2_place {
+    font-size: 14px;
+    color: #919da1;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    margin-bottom: 2px;
+}
+
+.podRegister_step2_line {
+    width: 350px;
+    height: 1px;
+    background-color: #e3e7e8;
+    margin: 32px 0;
+}
+
+.podRegiste_step2_comment1 {
+    margin: 0;
+    color: #52d4e0;
+    font-size: 12px;
+}
+
+.podRegiste_step2_comment2 {
+    margin: 0;
+    margin-top: 4px;
+}
+
+.podRegister_step2_totalAmount_input {
+    border: none;
+    width: 320px;
+    height: 48px;
+    font-size: 20px;
+    font-weight: 550;
+    line-height: 120%;
+    padding-left: 10px;
+    outline: none;
+}
+
+.podRegister_step2_totalAmount_text {
+    color: #919da1;
+    font-size: 12px;
+    border-bottom: 1px solid #52d4e0;
+}
+
+.podRegister_step2_SubmitButton {
+    width: 350px;
+    height: 40px;
+    background-color: #52d4e0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-top: 300px;
+}
+
+.podRegister_step3_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.podRegister_step3_img {
+    width: 177px;
+    height: 177px;
+}
+
+.podRegister_step3_podName {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 120%;
+    margin-bottom: 0;
+}
+
+.podRegister_step3_platform {
+    color: #52d4e0;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    margin-bottom: 12px;
+}
+
+.podRegister_step3_SubmitButton {
+    width: 350px;
+    height: 40px;
+    background-color: #52d4e0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-top: 200px;
+}
