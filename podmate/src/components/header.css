@@ -1,0 +1,32 @@
+.header_container {
+    margin: 0 20px;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+    /* width: 390px; */
+}
+
+.header_text {
+    font-size: 16px;
+    text-align: center;
+    font-weight: 500;
+    /* margin-left: 20px; */
+}
+.header_icn_img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.header_bell_img {
+    width: 24px;
+    height: 24px;
+    /* float: right; */
+    /* margin-right: 20px; */
+    /* margin-left: -20px; */
+}

@@ -1,0 +1,29 @@
+.headerButton_button_container {
+    margin-bottom: 20px;
+}
+
+.headerButton_button_active {
+    width: 50%;
+    height: 41px;
+    border: 1px solid #52d4e0;
+    border-radius: 5px;
+    background-color: white;
+    color: #52d4e0;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    cursor: pointer;
+}
+
+.headerButton_button {
+    width: 50%;
+    height: 41px;
+    border: 1px solid #f1f3f3;
+    border-radius: 5px;
+    background-color: #f1f3f3;
+    color: #919da1;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    cursor: pointer;
+}
