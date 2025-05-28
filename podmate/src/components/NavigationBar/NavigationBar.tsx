@@ -137,7 +137,7 @@ const TopBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding-right: 20px;
+  padding-right: 4px;
 `;
 
 const NavContainer = styled.nav`
@@ -201,27 +201,9 @@ const IconWrapper = styled.div`
 `;
 
 const BellIcon = () => (
-  <svg
-    width="22"
-    height="22"
-    viewBox="0 0 22 22"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M10 2C10 2 6.5 2 6.5 6.5C6.5 6.5 6.5 9.5 6.5 11.5C6.5 13.5 5 15 5 15H15C15 15 13.5 13.5 13.5 11.5C13.5 9.5 13.5 6.5 13.5 6.5C13.5 2 10 2 10 2Z"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M8.268 20C8.268 20 8.69602 20.5565 9.00005 20.732C9.30407 20.9075 9.64895 20.9999 10 20.9999C10.3511 20.9999 10.6959 20.9075 11 20.732C11.304 20.5565 11.732 20 11.732 20H8.268Z"
-      fill="currentColor"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
+  <img
+    src="/header/bell.png"
+    alt="알림"
+    style={{ width: 22, height: 24, display: "block" }}
+  />
 );
