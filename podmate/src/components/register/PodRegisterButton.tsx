@@ -19,7 +19,7 @@ export default function PodRegisterButton() {
     const onClickPodTypeCollective = () => {
         const currentPodType = '물품 공동구매';
         setPodType('물품 공동구매');
-        navigate('/register/minAmountPod', {
+        navigate('/register/groupBuyPod', {
             state: {
                 currentPodType,
             },

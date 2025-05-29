@@ -1,0 +1,118 @@
+.myorder-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.myorder-write-button {
+    width: 335px;
+    height: 40px;
+    background-color: #52d4e0;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.myorder-order-container {
+    width: 100%;
+    height: 120px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border-width: 0.5px 0px;
+    border-style: solid;
+    border-color: rgba(94, 106, 110, 0.12);
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    padding: 27px 20px;
+}
+
+.myorder-order-title {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-bottom: 15px;
+}
+
+.myorder-order-no {
+    font-family: 'Wanted Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 120%;
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: #2f3337;
+    margin: 0;
+    margin-right: 3px;
+}
+
+.myorder-order-platform {
+    font-family: 'Wanted Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 120%;
+    /* or 14px */
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: #919da1;
+    margin: 0;
+}
+
+.myorder-order-totalAmount {
+    font-family: 'Wanted Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 120%;
+
+    letter-spacing: -0.02em;
+    color: #33bbff;
+    margin: 0;
+    margin-right: 3px;
+}
+
+.myorder-order-jjim-img {
+    width: 20px;
+    height: 20px;
+}
+
+.myorder-order-jjim-img:active {
+    transform: scale(1.2);
+}
+.myorder-order-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    cursor: pointer;
+}
+
+.myorder-order-button {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 90px;
+    height: 30px;
+    background: #ffffff;
+    border: 1px solid #c8cfd0;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #c8cfd0;
+    &:hover {
+        color: #2f3337;
+        border: 1px solid #2f3337;
+    }
+}
+
+.myorder-order-button:active {
+    transform: scale(1.1);
+}
