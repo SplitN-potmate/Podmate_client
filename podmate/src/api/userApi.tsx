@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { postPodAddressProps, postPodMinOrderProps } from '../types/types';
+import { postPodAddressProps, postPodGroupBuyProps, postPodMinOrderProps } from '../types/types';
 
 const userAxios = axios.create({
     baseURL: 'http://3.37.242.204:8081',
@@ -26,6 +26,7 @@ export const testUser = async () => {
     return res.data;
 };
 
+//팟 목록 조회
 export const getPodList = async () => {
     const accessToken = localStorage.getItem('accessToken');
     try {
@@ -85,5 +86,184 @@ export const postPodMinOrder = async ({
             }
         );
         return res.data;
+    } catch {}
+};
+
+//물품 공동구매 팟 생성
+export const postPodGroupBuy = async ({
+    podName,
+    addressId,
+    endDate,
+    itemUrl,
+    totalAmount,
+    totalQuantity,
+    description,
+    unitPrice,
+    unitQuantitiy,
+}: postPodGroupBuyProps) => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.post(
+            `/api/pods/group-buy`,
+            {
+                podName: podName,
+                addressId: addressId,
+                deadline: endDate,
+                totalAmount: totalAmount,
+                totalQuantity: totalQuantity,
+                itemUrl: itemUrl,
+                description: description,
+                unitQuantitiy: unitQuantitiy,
+                unitPrice: unitPrice,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
+        );
+
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+//나의 팟 내역_진행 중인 팟 목록
+export const getInProgressMyPods = async () => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.get(`api/mypage/inprogress/mypods`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return res.data.result;
+    } catch {}
+};
+
+//나의 팟 내역_완료된 팟 목록
+export const getCompletedMyPods = async () => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.get(`api/mypage/completed/mypods`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return res.data.result;
+    } catch {}
+};
+
+//참여 팟 내역_진행 중인 팟 목록
+export const getInProgressJoinedPods = async () => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.get(`api/mypage/inprogress/joinedpods`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return res.data.result;
+    } catch {}
+};
+
+//참여 팟 내역_완료된된 팟 목록
+export const getCompletedJoinedPods = async () => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.get(`/api/mypage/completed/joinedpods`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return res.data.result;
+    } catch {}
+};
+
+//마이페이지_ 내가 남긴 후기 리스트 조회
+export const getMyReviews = async () => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.get(`/api/mypage/reviews/me`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return res.data.result;
+    } catch {}
+};
+
+//마이페이지_ 내가 받은 후기 리스트 조회
+export const getReceivedReviews = async () => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.get(`/api/mypage/reviews/me`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return res.data.result;
+    } catch {}
+};
+
+//??
+export const getOrderForms = async () => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.get(`/api/orderforms`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return res.data.result;
+    } catch {}
+};
+
+//장바구니 생성
+export const postCarts = async (platform: string) => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.post(
+            `/api/carts`,
+            {
+                platformName: platform,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
+        );
+        return res.data;
+    } catch {}
+};
+
+//마이페이지_장바구니 목록 조회
+export const getCarts = async () => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.get(`/api/mypage/carts/platforms`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return res.data;
+    } catch {}
+};
+
+type getCartItemsProps = {
+    platformInfoId: number;
+};
+//마이페이지_개별 장바구니 내 상품 목록 조회
+export const getCartItems = async (platformInfoId: getCartItemsProps) => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.get(`/api/mypage/carts/platforms/${platformInfoId}/cartItems`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return res.data.result;
     } catch {}
 };
