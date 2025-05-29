@@ -1,4 +1,4 @@
-import { getCompletedMyPods, getInProgressMyPods, getPodList } from '../../api/userApi';
+import { getCompletedMyPods, getInProgressMyPods } from '../../api/userApi';
 import Header from '../../components/Header';
 import Pod from '../../components/mypage/Pod';
 import { PodProps } from '../../types/types';

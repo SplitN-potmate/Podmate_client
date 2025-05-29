@@ -1,0 +1,80 @@
+.storedItem-div {
+    width: 335px;
+    margin: 0 20px;
+}
+
+.storedItem-container {
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+
+    border-bottom: 1px solid rgba(94, 106, 110, 0.12);
+}
+
+.storedItem-itemName {
+    font-family: 'Wanted Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 120%;
+    margin-bottom: 0px;
+    color: #2f3337;
+}
+
+.storedItem-itemOption {
+    font-family: 'Wanted Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 120%;
+    margin-bottom: 0;
+    color: #919da1;
+}
+
+.storedItem-itemUrl {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    gap: 2px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    width: 98px;
+    height: 30px;
+    background: #ffffff;
+    border: 1px solid #f1f3f3;
+    border-radius: 5px;
+    float: right;
+    /* 상품 보러가기 */
+
+    font-family: 'Wanted Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 120%;
+
+    text-align: center;
+    letter-spacing: -0.02em;
+
+    color: #27c3d8;
+}
+
+.storedItem-arrowImg {
+    width: 10px;
+    height: 10px;
+}
+
+.storeItem-trashImg {
+    width: 20px;
+    height: 20px;
+}
+
+.storeItem-top {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    cursor: pointer;
+}

@@ -1,81 +1,102 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Header from '../Header';
 import './myCartItems.css';
 import { useEffect, useState } from 'react';
-import { getCartItems } from '../../api/userApi';
-
-type ProductInputProps = {
-    name: string;
-    option: string;
-    quantity: string;
-    url: string;
-};
+import { getCartItems, postCartItems } from '../../api/userApi';
+import { CartItem, StoreItem } from '../../types/types';
+import StoredItem from './cart/StoredItem';
 
 export default function MyCartItems() {
     const location = useLocation();
-    const platformId = location.state?.platfromInfoId;
-    const [productInputs, setProductInputs] = useState<ProductInputProps[]>([
-        { name: '', option: '', quantity: '', url: '' },
-    ]);
+    const navigate = useNavigate();
+    const platformId = location.state?.platformInfoId;
+    // console.log('platformId', platformId);
+    // const [productInputs, setProductInputs] = useState<CartItem[]>([{ optionText: '', quantity: 0, itemUrl: '' }]);
+    const [productInputs, setProductInputs] = useState<StoreItem[]>([]);
+    const [inputFields, setInputFields] = useState<CartItem[]>([{ optionText: '', quantity: 0, itemUrl: '' }]);
 
     const getCartItemsData = async () => {
         try {
             const res = await getCartItems(platformId);
-            console.log('res', res);
-
-            // 빈 배열이면 기본 1세트 보여주기
-            if (!res || res.length === 0) {
-                setProductInputs([{ name: '', option: '', quantity: '', url: '' }]);
-            } else {
-                setProductInputs(res);
-            }
+            console.log('res', res.cartItemDtos);
+            setProductInputs(res.cartItemDtos);
+            // // 빈 배열이면 기본 1세트 보여주기
+            // if (!res.cartItemDtos || res.cartItemDtos.length === 0) {
+            //     setProductInputs([{ optionText: '', quantity: 0, itemUrl: '' }]);
+            // } else {
+            //     //
+            // }
         } catch (err) {
             console.error('API 호출 실패:', err);
-            setProductInputs([{ name: '', option: '', quantity: '', url: '' }]); // 오류 시에도 최소 1세트
+            // setProductInputs([{ optionText: '', quantity: 0, itemUrl: '' }]); // 오류 시에도 최소 1세트
         }
+    };
+
+    const postCartItemsData = async () => {
+        const res = await postCartItems({
+            platformInfoId: platformId,
+            itemList: inputFields, // 새로 입력한 값만 전송
+        });
+        console.log(res);
     };
 
     useEffect(() => {
         if (!platformId) return;
-        console.log(platformId);
         getCartItemsData();
     }, [platformId]);
 
     const handleAddProduct = () => {
-        setProductInputs([...productInputs, { name: '', option: '', quantity: '', url: '' }]);
+        setInputFields([...inputFields, { optionText: '', quantity: 0, itemUrl: '' }]);
+    };
+    const handleInputFieldChange = (index: number, field: keyof CartItem, value: string | number) => {
+        const updated = [...inputFields];
+        updated[index] = {
+            ...updated[index],
+            [field]: value,
+        };
+        setInputFields(updated);
     };
 
-    const handleInputChange = (index: number, field: keyof ProductInputProps, value: string) => {
+    const handleStoredItemChange = (index: number, field: keyof CartItem, value: string | number) => {
         const updated = [...productInputs];
-        updated[index][field] = value;
+        updated[index] = {
+            ...updated[index],
+            [field]: value,
+        };
         setProductInputs(updated);
+    };
+
+    const handleSubmitCartItems = () => {
+        postCartItemsData();
     };
 
     return (
         <div className="myCartItems-container">
             <Header pageName="장바구니 작성" />
             <div className="myCartItems-div">
-                {productInputs?.map((product, index) => (
+                {/* 저장된 장바구니 항목 보여주기 */}
+                {productInputs.length > 0 && productInputs[0].optionText !== '' && (
+                    <StoredItem items={productInputs} refreshItems={getCartItemsData} />
+                )}
+
+                {/* 사용자 입력을 위한 input 필드 */}
+                {inputFields.map((product, index) => (
                     <div key={index} className="myorder-write-div">
                         <input
-                            placeholder="상품명"
-                            value={product.name}
-                            onChange={(e) => handleInputChange(index, 'name', e.target.value)}
-                        />
-                        <input
                             placeholder="옵션"
-                            value={product.option}
-                            onChange={(e) => handleInputChange(index, 'option', e.target.value)}
+                            value={product.optionText}
+                            onChange={(e) => handleInputFieldChange(index, 'optionText', e.target.value)}
                         />
                         <input
+                            // type="number"
                             placeholder="수량"
                             value={product.quantity}
-                            onChange={(e) => handleInputChange(index, 'quantity', e.target.value)}
+                            onChange={(e) => handleInputFieldChange(index, 'quantity', Number(e.target.value))}
                         />
                         <input
                             placeholder="상품 URL"
-                            value={product.url}
-                            onChange={(e) => handleInputChange(index, 'url', e.target.value)}
+                            value={product.itemUrl}
+                            onChange={(e) => handleInputFieldChange(index, 'itemUrl', e.target.value)}
                         />
                     </div>
                 ))}
@@ -85,8 +106,12 @@ export default function MyCartItems() {
             </div>
 
             <div className="myCartItems-submit-button-div">
-                <button className="myCartItems-submit-button">취소</button>
-                <button className="myCartItems-submit-button">저장</button>
+                <button className="myCartItems-submit-button" onClick={() => navigate('/my/myCart')}>
+                    취소
+                </button>
+                <button className="myCartItems-submit-button" onClick={handleSubmitCartItems}>
+                    저장
+                </button>
             </div>
         </div>
     );

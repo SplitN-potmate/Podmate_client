@@ -5,6 +5,7 @@ import { getCarts } from '../../api/userApi';
 import { useNavigate } from 'react-router-dom';
 
 type orderFrom = {
+    cartName: string;
     platformInfoId: number;
     platformName: string;
 };
@@ -33,6 +34,7 @@ export default function MyCartList() {
                 platformInfoId,
             },
         });
+        console.log('ss', platformInfoId);
     };
 
     return (
@@ -54,7 +56,7 @@ export default function MyCartList() {
                               <div className="myorder-order-container">
                                   <div className="myorder-order-top">
                                       <div className="myorder-order-title">
-                                          <p className="myorder-order-no">장바구니{item.platformInfoId}</p>
+                                          <p className="myorder-order-no">{item.cartName}</p>
                                           <p className="myorder-order-platform ">{item.platformName}</p>
                                       </div>
                                       <img

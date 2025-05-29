@@ -1,7 +1,11 @@
 .podRegister_total_div {
     margin: 0 20px;
-    width: 350px;
+    width: 335px;
     padding-bottom: 280px;
+}
+
+.podReigster_total_container {
+    width: 100%;
 }
 
 .podRegister_podNameQ {
@@ -12,7 +16,8 @@
     border-radius: 4px;
     background-color: white;
     border: 1px solid #52d4e0;
-    width: 340px;
+    width: 330px;
+
     height: 48px;
     font-size: 14px;
     margin-bottom: 5px;
@@ -22,7 +27,7 @@
     border-radius: 4px;
     background-color: white;
     border: 1px solid #52d4e0;
-    width: 346px;
+    width: 335px;
     height: 54px;
     font-size: 14px;
 }
@@ -32,7 +37,7 @@
 }
 
 .react-datepicker-ignore-onclickoutside {
-    width: 340px;
+    width: 300px;
     height: 48px;
     background-color: white;
     border: 1px solid #52d4e0;
@@ -46,7 +51,7 @@
 }
 
 .react-datepicker__input-container input {
-    width: 340px;
+    width: 330px;
     height: 52px;
     background-color: white;
     border: 1px solid #52d4e0;
@@ -56,14 +61,14 @@
 }
 
 .react-datepicker {
-    width: 340px;
+    width: 335px;
     margin: 0 20px;
     z-index: 100;
 }
 
 .react-datepicker__header {
     background-color: white;
-    width: 340px;
+    width: 335px;
     border-bottom: none !important;
 }
 
@@ -80,7 +85,7 @@
 }
 
 .podRegister_meetPlace_button {
-    width: 346px;
+    width: 335px;
     height: 40px;
     background-color: #52d4e0;
     border: 1px solid #52d4e0;
@@ -91,7 +96,7 @@
 
 .podRegister_ste1_complete_button_active,
 .podRegister_ste1_complete_button {
-    width: 346px;
+    width: 335px;
     height: 46px;
     background-color: #52d4e0;
     color: white;
@@ -164,7 +169,7 @@
 
 .podRegister_step2_totalAmount_input {
     border: none;
-    width: 320px;
+    width: 310px;
     height: 48px;
     font-size: 20px;
     font-weight: 550;
@@ -180,7 +185,7 @@
 }
 
 .podRegister_step2_SubmitButton {
-    width: 350px;
+    width: 335px;
     height: 40px;
     background-color: #52d4e0;
     color: white;
