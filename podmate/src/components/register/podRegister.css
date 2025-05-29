@@ -225,3 +225,32 @@
     border-radius: 4px;
     margin-top: 200px;
 }
+
+.podRegisterGroupBuy_step2_text {
+    color: #919da1;
+    font-size: 14px;
+    border-bottom: 1px solid #52d4e0;
+}
+
+.podRegisterGroupBuy_step2_totalAmount_input {
+    border: none;
+    width: 280px;
+    height: 48px;
+    font-size: 20px;
+    font-weight: 550;
+    line-height: 120%;
+    padding-left: 10px;
+    outline: none;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.podRegisterGroupBuy_step2_SubmitButton {
+    width: 350px;
+    height: 40px;
+    background-color: #52d4e0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-top: 50px;
+}

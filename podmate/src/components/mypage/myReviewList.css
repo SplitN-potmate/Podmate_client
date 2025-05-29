@@ -1,0 +1,45 @@
+.myReview-container {
+    box-sizing: border-box;
+
+    height: 128px;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(94, 106, 110, 0.12);
+    margin-top: 26px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.myReview_review_title_div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.myReview_review_title {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+    margin-right: 5px;
+}
+
+.myReview_review_profile {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.myReview-review-comment {
+    border: 1px solid #27c3d8;
+    background-color: #f1f3f3;
+    border-radius: 15px;
+    width: fit-content;
+    color: #27c3d8;
+    padding: 5px;
+    margin-right: 8px;
+}
+
+.myReview-review-lis {
+    display: flex;
+    overflow-y: auto;
+}

@@ -1,4 +1,5 @@
 export interface PodProps {
+
   podId: number;
   podName: string;
   podType: string;
@@ -35,6 +36,7 @@ export interface MapState {
   bounds: MapBounds | null;
   markers: any[];
   selectedPod: PodProps | null;
+
 }
 
 export interface HeaderButtonProps {
@@ -50,6 +52,18 @@ export type postPodMinOrderProps = {
   endDate: Date | null;
   totalAmount: number;
   description: string | null;
+};
+
+export type postPodGroupBuyProps = {
+    podName: string;
+    addressId: number;
+    endDate: Date | null;
+    totalAmount: number;
+    itemUrl: string;
+    description: string | null;
+    unitQuantitiy: number;
+    unitPrice: number;
+    totalQuantity: number;
 };
 
 export interface postPodAddressProps {
