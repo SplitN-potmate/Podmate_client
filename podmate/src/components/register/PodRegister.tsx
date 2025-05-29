@@ -104,7 +104,7 @@ export default function PodRegister() {
     };
 
     const handleSubmitStep3button = () => {
-        navigate('/main');
+        navigate('/');
     };
 
     function formatWithComma(numStr: string): string {
@@ -118,7 +118,7 @@ export default function PodRegister() {
             <div className="podRegister_total_div">
                 <HeaderButton type1="최소금액 주문" type2="물품 공동구매" activeType={podType} />
 
-                <div>
+                <div className="podReigster_total_container">
                     {step === 1 && (
                         <>
                             <p className="podRegister_podNameQ">팟 이름을 입력해주세요</p>

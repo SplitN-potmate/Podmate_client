@@ -12,7 +12,7 @@ export default function OAuthRedirect() {
             localStorage.setItem('refreshToken', refreshToken);
 
             // alert('로그인 성공!');
-            window.location.href = '/main';
+            window.location.href = '/';
             //메인페이지로 이동
         } else {
             alert('로그인 실패…');

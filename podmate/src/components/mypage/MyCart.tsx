@@ -9,10 +9,11 @@ import Modal from '../Modal';
 export default function MyCart() {
     const navigate = useNavigate();
     const [platform, setPlatform] = useState<string>('');
+    const [cartName, setCartName] = useState<string>('');
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     const postNewCart = async () => {
-        const res = await postCarts(platform);
+        const res = await postCarts(platform, cartName);
         console.log(res);
         if (res.isSuccess) {
             setIsModalOpen(true);
@@ -31,13 +32,15 @@ export default function MyCart() {
 
     const closeModal = () => {
         setIsModalOpen(false);
-        navigate('/my/myOrder');
+        navigate('/my/myCart');
     };
 
     return (
         <>
             <Header pageName="장바구니 생성" />
             <div className="myorder-write-div">
+                <h3>장바구니명 입력</h3>
+                <input value={cartName} onChange={(e) => setCartName(e.target.value)} />
                 <h3>플랫폼 선택</h3>
                 <select className="podRegister_select" onChange={handleSelectPlatForm}>
                     {shoppingmallList.map((mall, index) => (
