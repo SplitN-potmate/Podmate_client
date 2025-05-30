@@ -36,7 +36,6 @@ const MobileFrame = styled.div`
   height: 812px;
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  overflow: auto;
   /* padding-bottom: 60px; */
   /* 스크롤바 숨기기 */
   &::-webkit-scrollbar {
@@ -44,17 +43,8 @@ const MobileFrame = styled.div`
   }
   -ms-overflow-style: none; /* IE, Edge */
   scrollbar-width: none; /* Firefox */
-  width: 375px;
-  height: 812px;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  position: relative;
+
   overflow: hidden;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  -ms-overflow-style: none; /* IE, Edge */
-  scrollbar-width: none; /* Firefox */
 `;
 
 // 내부 라우팅과 NavigationBar 조건 렌더링

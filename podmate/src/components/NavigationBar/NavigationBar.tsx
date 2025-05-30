@@ -166,9 +166,8 @@ const TopBar = styled.div`
 `;
 
 const NavContainer = styled.nav`
-  /* position: absolute; */
-  position: fixed;
-  bottom: 40px;
+  position: absolute;
+  bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
   height: 60px;
