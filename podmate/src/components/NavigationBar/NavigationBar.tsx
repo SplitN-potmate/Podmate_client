@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const NavigationBar = (): React.ReactElement => {
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -97,10 +98,34 @@ const NavigationBar = (): React.ReactElement => {
   return (
     <>
       <TopBar>
-        <AlarmItem onClick={() => {}}>
+        <AlarmItem onClick={() => setDrawerOpen(true)}>
           <BellIcon />
         </AlarmItem>
       </TopBar>
+      <DrawerBackdrop open={drawerOpen} onClick={() => setDrawerOpen(false)} />
+      <NotificationDrawer open={drawerOpen}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <h3>알림</h3>
+          <button
+            onClick={() => setDrawerOpen(false)}
+            style={{
+              fontSize: 20,
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            ×
+          </button>
+        </div>
+        <div style={{ marginTop: 24 }}>알림 목록을 예정</div>
+      </NotificationDrawer>
       <NavContainer>
         {navItems.map((item) => (
           <NavItem
@@ -207,3 +232,30 @@ const BellIcon = () => (
     style={{ width: 22, height: 24, display: "block" }}
   />
 );
+
+const NotificationDrawer = styled.div<{ open: boolean }>`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+  z-index: 200;
+  transform: translateX(${(props) => (props.open ? "0" : "100%")});
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+`;
+
+const DrawerBackdrop = styled.div<{ open: boolean }>`
+  display: ${(props) => (props.open ? "block" : "none")};
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 150;
+`;

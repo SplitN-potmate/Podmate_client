@@ -64,3 +64,18 @@ export type placeProps = {
   latitude: number;
   longitude: number;
 };
+
+export interface PodDetail {
+  currentAmount: number;
+  goalAmount: number;
+  jjim: boolean;
+  platform: string;
+  podId: number;
+  podLeader: {
+    description: string;
+    nickname: string;
+    profileImageUrl: string;
+  };
+  podName: string;
+  podType: string;
+}

@@ -13,6 +13,7 @@ import MyPage from "./pages/myPage/MyPage";
 import PodRegisterPage from "./pages/PodRegisterPage";
 import MyPodList from "./pages/myPage/MyPodList";
 import PodRegister from "./components/register/PodRegister";
+import PodJoinPage from "./pages/PodJoinPage";
 
 const BackGround = styled.div`
   background-color: #cccccc;
@@ -28,8 +29,7 @@ const MobileFrame = styled.div`
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   position: relative;
-  overflow: auto;
-  /* 스크롤바 숨기기 */
+  overflow: hidden;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -41,7 +41,10 @@ const MobileFrame = styled.div`
 const AppRoutes = () => {
   const location = useLocation();
   const hideNav =
-    location.pathname === "/login" || location.pathname === "/oauth/redirect";
+    location.pathname === "/login" ||
+    location.pathname === "/oauth/redirect" ||
+    location.pathname.startsWith("/pod/join/mini") ||
+    location.pathname.startsWith("/pod/join/group");
 
   return (
     <>
@@ -53,6 +56,8 @@ const AppRoutes = () => {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/my/mypodList" element={<MyPodList />} />
         <Route path="/register/minAmountPod" element={<PodRegister />} />
+        <Route path="/pod/join/mini" element={<PodJoinPage />} />
+        <Route path="/pod/join/group" element={<PodJoinPage />} />
       </Routes>
       {!hideNav && <NavigationBar />}
     </>
