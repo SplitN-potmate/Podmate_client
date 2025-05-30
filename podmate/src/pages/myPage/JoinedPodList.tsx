@@ -1,25 +1,24 @@
-import { getCompletedMyPods, getInProgressMyPods } from '../../api/userApi';
+import { getCompletedJoinedPods, getInProgressJoinedPods } from '../../api/userApi';
 import Header from '../../components/Header';
 import Pod from '../../components/mypage/Pod';
 import { PodProps } from '../../types/types';
-
 import './myPodList.css';
 import { useEffect, useState } from 'react';
 
-export default function MyPodList() {
+export default function JoinedPodList() {
     const [activeB, setActiveB] = useState<string>('inProgress');
     const [podList, setPodList] = useState<PodProps[]>([]);
-    const fetchData = async () => {
+    const fetchInProgressJoinedPods = async () => {
         try {
-            const podList = await getInProgressMyPods();
+            const podList = await getInProgressJoinedPods();
             console.log(podList);
             setPodList(podList);
         } catch (error) {
             console.error(error);
         }
     };
-    const fetchgetCompletedMyPodData = async () => {
-        const res = await getCompletedMyPods();
+    const fetchgetCompletedJoindedPods = async () => {
+        const res = await getCompletedJoinedPods();
         console.log(res);
         setPodList(res);
         return res;
@@ -27,9 +26,9 @@ export default function MyPodList() {
 
     useEffect(() => {
         if (activeB === 'inProgress') {
-            fetchData();
+            fetchInProgressJoinedPods();
         } else {
-            fetchgetCompletedMyPodData();
+            fetchgetCompletedJoindedPods();
         }
     }, [activeB]);
 

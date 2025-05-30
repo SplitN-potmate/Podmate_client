@@ -166,12 +166,13 @@ const TopBar = styled.div`
 `;
 
 const NavContainer = styled.nav`
-  position: absolute;
-  bottom: 0;
-  left: 48%;
-  transform: translateX(-48%);
+  /* position: absolute; */
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
   height: 60px;
-  width: 390px; // 고정 모바일 프레임 크기
+  width: 375px; // 고정 모바일 프레임 크기
   background-color: white;
   display: flex;
   justify-content: center;
