@@ -15,6 +15,7 @@ import MyCart from './components/mypage/MyCart';
 import MyCartList from './pages/myPage/MyCartList';
 import MyReviewList from './components/mypage/MyReviewList';
 import MyCartItems from './components/mypage/MyCartItems';
+import ReviewPage from './pages/review/ReviewPage';
 
 const BackGround = styled.div`
     background-color: #cccccc;
@@ -62,6 +63,7 @@ const AppRoutes = () => {
                 <Route path="/my/myReviews" element={<MyReviewList />} />
                 <Route path="/register/minAmountPod" element={<PodRegister />} />
                 <Route path="/register/groupBuyPod" element={<PodRegisterGroupBuy />} />
+                <Route path="/review" element={<ReviewPage />} />
             </Routes>
             {!hideNav && <NavigationBar />}
         </>

@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { postCartItemsProps, postPodAddressProps, postPodGroupBuyProps, postPodMinOrderProps } from '../types/types';
+import {
+    postCartItemsProps,
+    postPodAddressProps,
+    postPodGroupBuyProps,
+    postPodMinOrderProps,
+    ReviewTarget,
+} from '../types/types';
 
 const userAxios = axios.create({
     baseURL: 'http://3.37.242.204:8081',
@@ -186,7 +192,7 @@ export const getInProgressJoinedPods = async () => {
     } catch {}
 };
 
-//참여 팟 내역_완료된된 팟 목록
+//참여 팟 내역_완료된 팟 목록
 export const getCompletedJoinedPods = async () => {
     const accessToken = localStorage.getItem('accessToken');
     try {
@@ -316,6 +322,39 @@ export const postDeleteItem = async (itemId: number) => {
                 Authorization: `Bearer ${accessToken}`,
             },
         });
+        return res.data.result;
+    } catch {}
+};
+
+//후기 남기기_후기 대상 선택 api
+export const getReviewTarget = async (podId: number) => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.get(`/api/reviews/${podId}`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return res.data.result;
+    } catch {}
+};
+
+//후기 남기기_후기 등록 api
+export const postReviewTarget = async ({ podId, recipientId, options }: ReviewTarget) => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.post(
+            `/api/reviews/${recipientId}`,
+            {
+                podId: podId,
+                options: options,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
+        );
         return res.data.result;
     } catch {}
 };

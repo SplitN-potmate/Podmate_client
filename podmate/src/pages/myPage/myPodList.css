@@ -35,7 +35,7 @@
 .myPodList_pod_container {
     /* width: 100%; */
     height: 128px;
-    border-bottom: 1px solid #5e6a6e;
+    border-bottom: 1px solid rgba(94, 106, 110, 0.12);
     display: flex;
     flex-direction: column;
     cursor: pointer;

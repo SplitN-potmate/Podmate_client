@@ -93,3 +93,9 @@ export type StoreItem = CartItem & {
     itemName: string;
     itemId: number;
 };
+
+export interface ReviewTarget {
+    podId: number;
+    recipientId: number;
+    options: string[];
+}
