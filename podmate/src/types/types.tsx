@@ -94,8 +94,24 @@ export type StoreItem = CartItem & {
     itemId: number;
 };
 
+
 export interface ReviewTarget {
     podId: number;
     recipientId: number;
     options: string[];
+
+export interface PodDetail {
+  currentAmount: number;
+  goalAmount: number;
+  jjim: boolean;
+  platform: string;
+  podId: number;
+  podLeader: {
+    description: string;
+    nickname: string;
+    profileImageUrl: string;
+  };
+  podName: string;
+  podType: string;
+
 }

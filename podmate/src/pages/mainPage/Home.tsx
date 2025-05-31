@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { getPods, testUser } from "../../api/userApi";
 import { PodProps, MapState, MapBounds } from "../../types/types";
 import PodInfoCard from "../../components/PodInfoCard/PodInfoCard";
+import PodListModal from "../../components/PodList/PodListModal";
 
 // 마커 이미지 크기 및 옵션 수정
 const MARKER_IMAGE_SIZE = new window.kakao.maps.Size(31, 41); // SVG 크기에 맞게 수정
@@ -37,6 +38,7 @@ const Home = (): React.ReactElement => {
   const [mapState, setMapState] = useState<MapState>(initialMapState);
   const mapStateRef = useRef(mapState);
   mapStateRef.current = mapState;
+  const [showPodList, setShowPodList] = useState(false);
 
   //test User2
   useEffect(() => {
@@ -181,7 +183,6 @@ const Home = (): React.ReactElement => {
   const fetchPods = useCallback(
     async (bounds: MapBounds) => {
       try {
-        console.log("Fetching pods with bounds:", bounds);
         const podsData: PodProps[] = await getPods({
           lat1: bounds.swLat,
           lat2: bounds.neLat,
@@ -458,6 +459,19 @@ const Home = (): React.ReactElement => {
     };
   }, [mapState.markers]);
 
+  // 모달이 열려있을 때 배경 스크롤 방지
+  useEffect(() => {
+    if (showPodList) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [showPodList]);
+
   if (mapState.isMapLoading) {
     return (
       <MapContainer ref={mapRef}>
@@ -489,8 +503,28 @@ const Home = (): React.ReactElement => {
           </AddressInfo>
         </>
       )}
-      {mapState.selectedPod && <PodInfoCard {...mapState}></PodInfoCard>}
-      {mapState.pods.length && <PodsListButton>목록보기!!!!!</PodsListButton>}
+      {mapState.selectedPod && (
+        <PodInfoCard type="modal" selectedPod={mapState.selectedPod} />
+      )}
+      {mapState.pods.length > 0 && (
+        <PodsListButton
+          onClick={() => {
+            setMapState((prev) => ({
+              ...prev,
+              selectedPod: null,
+            }));
+            setShowPodList(true);
+          }}
+        >
+          목록보기
+        </PodsListButton>
+      )}
+      {showPodList && (
+        <PodListModal
+          pods={mapState.pods}
+          onClose={() => setShowPodList(false)}
+        />
+      )}
       <CurrentLocationButton
         onClick={moveToCurrentLocation}
         isLoading={mapState.isLoading}
