@@ -1,3 +1,4 @@
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -21,6 +22,8 @@ import MyCartList from "./pages/myPage/MyCartList";
 import MyReviewList from "./components/mypage/MyReviewList";
 import MyCartItems from "./components/mypage/MyCartItems";
 import PodJoinPage from "./pages/PodJoinPage";
+import ReviewPage from './pages/review/ReviewPage';
+
 
 const BackGround = styled.div`
   background-color: #cccccc;
@@ -52,29 +55,31 @@ const AppRoutes = () => {
   const location = useLocation();
   const hideNav = location.pathname !== "/" && location.pathname !== "/mypage";
 
-  return (
-    <>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/oauth/redirect" element={<OAuthRedirect />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<PodRegisterPage />} />
-        <Route path="/mypage" element={<MyPage />} />
-        <Route path="/my/mypodList" element={<MyPodList />} />
-        <Route path="/my/joinedpodList" element={<JoinedPodList />} />
-        <Route path="/my/myCart" element={<MyCartList />} />
-        <Route path="/my/myOrder/write" element={<MyOrderWrite />} />
-        <Route path="/my/cart" element={<MyCart />} />
-        <Route path="/my/cartItems" element={<MyCartItems />} />
-        <Route path="/my/myReviews" element={<MyReviewList />} />
-        <Route path="/register/minAmountPod" element={<PodRegister />} />
-        <Route path="/register/groupBuyPod" element={<PodRegisterGroupBuy />} />
-        <Route path="/pod/join/mini" element={<PodJoinPage />} />
+    return (
+        <>
+            <Routes>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/oauth/redirect" element={<OAuthRedirect />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/register" element={<PodRegisterPage />} />
+                <Route path="/mypage" element={<MyPage />} />
+                <Route path="/my/mypodList" element={<MyPodList />} />
+                <Route path="/my/joinedpodList" element={<JoinedPodList />} />
+                <Route path="/my/myCart" element={<MyCartList />} />
+                <Route path="/my/myOrder/write" element={<MyOrderWrite />} />
+                <Route path="/my/cart" element={<MyCart />} />
+                <Route path="/my/cartItems" element={<MyCartItems />} />
+                <Route path="/my/myReviews" element={<MyReviewList />} />
+                <Route path="/register/minAmountPod" element={<PodRegister />} />
+                <Route path="/register/groupBuyPod" element={<PodRegisterGroupBuy />} />
+                <Route path="/review" element={<ReviewPage />} />
+                  <Route path="/pod/join/mini" element={<PodJoinPage />} />
         <Route path="/pod/join/group" element={<PodJoinPage />} />
-      </Routes>
-      {!hideNav && <NavigationBar />}
-    </>
-  );
+            </Routes>
+            {!hideNav && <NavigationBar />}
+        </>
+    );
+
 };
 
 const App = () => {

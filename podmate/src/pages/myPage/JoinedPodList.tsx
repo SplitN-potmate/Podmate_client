@@ -1,9 +1,10 @@
 import { getCompletedJoinedPods, getInProgressJoinedPods } from '../../api/userApi';
 import Header from '../../components/Header';
+import CompletedPod from '../../components/mypage/CompletedPod';
 import Pod from '../../components/mypage/Pod';
 import { PodProps } from '../../types/types';
 import './myPodList.css';
-import { useEffect, useState } from 'react';
+import { act, useEffect, useState } from 'react';
 
 export default function JoinedPodList() {
     const [activeB, setActiveB] = useState<string>('inProgress');
@@ -60,22 +61,26 @@ export default function JoinedPodList() {
                 </div>
 
                 <div className="myPodList_podList_div">
-                    {podList
-                        ? podList.map((pod) => (
-                              <Pod
-                                  key={pod.podId}
-                                  podId={pod.podId}
-                                  podName={pod.podName}
-                                  podType={pod.podType}
-                                  podStatus={pod.podStatus}
-                                  itemUrl={pod.itemUrl}
-                                  currentAmount={pod.currentAmount}
-                                  goalAmount={pod.goalAmount}
-                                  jjim={pod.jjim}
-                                  platform={pod.platform}
-                              />
-                          ))
-                        : ''}
+                    {podList &&
+                        podList.map((pod) => {
+                            const isCompleted = activeB === 'completed';
+                            const PodComponent = isCompleted ? CompletedPod : Pod;
+
+                            return (
+                                <PodComponent
+                                    key={pod.podId}
+                                    podId={pod.podId}
+                                    podName={pod.podName}
+                                    podType={pod.podType}
+                                    podStatus={pod.podStatus}
+                                    itemUrl={pod.itemUrl}
+                                    currentAmount={pod.currentAmount}
+                                    goalAmount={pod.goalAmount}
+                                    jjim={pod.jjim}
+                                    platform={pod.platform}
+                                />
+                            );
+                        })}
                 </div>
             </div>
         </>
