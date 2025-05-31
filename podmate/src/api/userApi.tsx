@@ -319,3 +319,52 @@ export const postDeleteItem = async (itemId: number) => {
         return res.data.result;
     } catch {}
 };
+
+export const postJjim = async (podId: number) => {
+  const accessToken = localStorage.getItem("accessToken");
+
+  try {
+    const res = await userAxios.post(
+      `/api/jjims`,
+      {
+        podId: podId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return res;
+  } catch {}
+};
+
+export const getPodDetail = async (podId: number) => {
+  const accessToken = localStorage.getItem("accessToken");
+  try {
+    const res = await userAxios.get(`/api/pods/${podId}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return res.data.result;
+  } catch (error) {
+    console.error("Failed to fetch pod detail:", error);
+    return null;
+  }
+};
+
+export const getNotifications = async () => {
+  const accessToken = localStorage.getItem("accessToken");
+  try {
+    const res = await userAxios.get(`/api/notifications/unread-count`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return res.data.result;
+  } catch (error) {
+    console.error("Failed to fetch pod detail:", error);
+    return null;
+  }
+};
