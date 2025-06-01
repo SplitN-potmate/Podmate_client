@@ -13,7 +13,9 @@ export interface PodProps {
     roadAddress?: string | null;
     addressId?: number | null;
     podStatus: string;
+    inprogressStatus?: string;
 }
+
 export interface MapBounds {
     swLat: number;
     swLng: number;
@@ -94,24 +96,23 @@ export type StoreItem = CartItem & {
     itemId: number;
 };
 
-
 export interface ReviewTarget {
     podId: number;
     recipientId: number;
     options: string[];
+}
 
 export interface PodDetail {
-  currentAmount: number;
-  goalAmount: number;
-  jjim: boolean;
-  platform: string;
-  podId: number;
-  podLeader: {
-    description: string;
-    nickname: string;
-    profileImageUrl: string;
-  };
-  podName: string;
-  podType: string;
-
+    currentAmount: number;
+    goalAmount: number;
+    jjim: boolean;
+    platform: string;
+    podId: number;
+    podLeader: {
+        description: string;
+        nickname: string;
+        profileImageUrl: string;
+    };
+    podName: string;
+    podType: string;
 }

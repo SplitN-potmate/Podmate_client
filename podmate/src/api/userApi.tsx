@@ -91,6 +91,9 @@ export const postPodMinOrder = async ({
                 },
             }
         );
+
+        console.log('res', res.data);
+
         return res.data;
     } catch {}
 };
@@ -357,53 +360,194 @@ export const postReviewTarget = async ({ podId, recipientId, options }: ReviewTa
         );
         return res.data.result;
     } catch {}
+};
 
 export const postJjim = async (podId: number) => {
-  const accessToken = localStorage.getItem("accessToken");
-
-  try {
-    const res = await userAxios.post(
-      `/api/jjims`,
-      {
-        podId: podId,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-    return res;
-  } catch {}
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.post(
+            `/api/jjims`,
+            {
+                podId: podId,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
+        );
+        return res;
+    } catch {}
 };
 
 export const getPodDetail = async (podId: number) => {
-  const accessToken = localStorage.getItem("accessToken");
-  try {
-    const res = await userAxios.get(`/api/pods/${podId}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    return res.data.result;
-  } catch (error) {
-    console.error("Failed to fetch pod detail:", error);
-    return null;
-  }
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.get(`/api/pods/${podId}`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return res.data.result;
+    } catch (error) {
+        console.error('Failed to fetch pod detail:', error);
+        return null;
+    }
 };
 
 export const getNotifications = async () => {
-  const accessToken = localStorage.getItem("accessToken");
-  try {
-    const res = await userAxios.get(`/api/notifications/unread-count`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    return res.data.result;
-  } catch (error) {
-    console.error("Failed to fetch pod detail:", error);
-    return null;
-  }
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.get(`/api/notifications/unread-count`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return res.data.result;
+    } catch (error) {
+        console.error('Failed to fetch pod detail:', error);
+        return null;
+    }
+};
 
+type PostAccountInfoProps = {
+    depositAccountBank: string;
+    depositAccountNumber: string;
+    depositAccountHolder: string;
+    podId: number;
+};
+
+//팟장의 입금 계좌 입력 api
+export const postAccountInfo = async ({
+    depositAccountBank,
+    depositAccountNumber,
+    depositAccountHolder,
+    podId,
+}: PostAccountInfoProps) => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.patch(
+            `/api/mypage/inprogress/mypods/${podId}/deposit-account`,
+            {
+                depositAccountBank: depositAccountBank,
+                depositAccountNumber: depositAccountNumber,
+                depositAccountHolder: depositAccountHolder,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
+        );
+        return res.data.result;
+    } catch (error) {
+        console.error('Failed to fetch pod detail:', error);
+        throw error;
+    }
+};
+
+type PostTrackingNumProps = {
+    trackingNum: string;
+    courierCompany: string;
+    podId: number;
+};
+
+//팟장의 운송장 입력 api
+export const postTrackingNum = async ({ trackingNum, courierCompany, podId }: PostTrackingNumProps) => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.post(
+            `/api/mypage/inprogress/mypods/${podId}`,
+            {
+                trackingNum: trackingNum,
+                courierCompany: courierCompany,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
+        );
+        return res.data.result;
+    } catch (error) {
+        console.error('Failed to fetch pod detail:', error);
+        throw error;
+    }
+};
+
+//팟 상태 변경
+export const patchPodStatus = async (status: string, podId: number) => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.patch(
+            `/api/pods/${podId}/status`,
+            {
+                status,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
+        );
+        return res.data.result;
+    } catch (error) {
+        console.error('Failed to fetch pod detail:', error);
+        throw error;
+    }
+};
+
+//승인 대기 중인 팟원 조회 api
+export const getPodMembers = async (podId: number) => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.get(`/api/mypage/inprogress/mypods/${podId}/podmembers`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        console.log('mem', res.data.result);
+        return res.data.result;
+    } catch (error) {
+        console.error('Failed to fetch pod detail:', error);
+        return null;
+    }
+};
+
+//팟원 승인 api
+export const patchApprovalStatus = async (memberId: number, podId: number, isApprovedStatus: string) => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.patch(
+            `/api/mypage/inprogress/mypods/${podId}/podmembers/${memberId}/status`,
+            {
+                isApprovedStatus,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
+        );
+        return res.data.result;
+    } catch (error) {
+        console.error('Failed to fetch pod detail:', error);
+        throw error;
+    }
+};
+
+export const getMemberOrder = async (podId: number, memberId: number) => {
+    const accessToken = localStorage.getItem('accessToken');
+    try {
+        const res = await userAxios.get(`/api/mypage/mypods/${podId}/${memberId}/order`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        console.log(res.data.result);
+        return res.data.result;
+    } catch (error) {
+        console.error('Failed to fetch pod detail:', error);
+        return null;
+    }
 };

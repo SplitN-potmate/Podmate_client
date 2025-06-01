@@ -8,6 +8,7 @@
     align-items: center;
     margin-left: 20px;
     margin-bottom: 20px;
+    position: relative;
 }
 .review-container {
     /* display: flex;
@@ -45,7 +46,8 @@
     border-top: 1px solid #5ed4e0;
     transform: rotate(-45deg);
     position: absolute;
-    left: 40px;
+    left: -8px;
+
     z-index: 10;
 }
 
