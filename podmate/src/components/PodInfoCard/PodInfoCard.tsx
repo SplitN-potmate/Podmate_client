@@ -2,7 +2,13 @@ import styled, { keyframes } from "styled-components";
 import { PodProps, PodDetail } from "../../types/types";
 import HeartShape from "../HeartShape";
 import { useState, useEffect } from "react";
-import { postJjim, getPodDetail, patchJjim, getUser } from "../../api/userApi";
+import {
+  postJjim,
+  getPodDetail,
+  patchJjim,
+  getUser,
+  getUserProfile,
+} from "../../api/userApi";
 import { useNavigate } from "react-router-dom";
 
 interface PodInfoCardProps {
@@ -26,9 +32,10 @@ const PodInfoCard = ({ selectedPod, type }: PodInfoCardProps) => {
         const detail = await getPodDetail(selectedPod.podId);
 
         setPodDetail(detail);
-        if (detail.podLeader.userId) {
+        if (detail.podLeader.nickname) {
           const myId = await getUser();
-          if (myId.userId === detail.podLeader.userId) {
+          const myNickname = await getUserProfile(myId.userId);
+          if (myNickname.profile.nickname === detail.podLeader.nickname) {
             setIsLeader(true);
           }
         }
@@ -71,7 +78,7 @@ const PodInfoCard = ({ selectedPod, type }: PodInfoCardProps) => {
       }
     }
   };
-
+  console.log(isLeader);
   return (
     <PodInfoOverlay type={type} onClick={(e) => e.stopPropagation()}>
       <PodInfoContent>
@@ -139,7 +146,8 @@ const PodInfoCard = ({ selectedPod, type }: PodInfoCardProps) => {
         )}
         <PodInfoLine isUpper={true}>
           <div></div>
-          {isLeader! && (
+
+          {isLeader === false && (
             <PodJoinButton onClick={handleJoinClick}>
               참여하기
               <svg
