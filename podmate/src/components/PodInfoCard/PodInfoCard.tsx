@@ -2,7 +2,7 @@ import styled, { keyframes } from "styled-components";
 import { PodProps, PodDetail } from "../../types/types";
 import HeartShape from "../HeartShape";
 import { useState, useEffect } from "react";
-import { postJjim, getPodDetail } from "../../api/userApi";
+import { postJjim, getPodDetail, patchJjim } from "../../api/userApi";
 import { useNavigate } from "react-router-dom";
 
 interface PodInfoCardProps {
@@ -35,15 +35,14 @@ const PodInfoCard = ({ selectedPod, type }: PodInfoCardProps) => {
     if (loading || !selectedPod.podId) return;
     setLoading(true);
     try {
-      // const response = await postJjim(selectedPod.podId);
-      // if (response?.isSuccess) {
-      //   setIsJjim(!isJjim);
-      // } else {
-      //   console.error(
-      //     "Failed to toggle jjim:",
-      //     response?.message || "Unknown error"
-      //   );
-      // }
+      const response = isJjim
+        ? await patchJjim(selectedPod.podId)
+        : await postJjim(selectedPod.podId);
+      if (response?.status === 200) {
+        setIsJjim(!isJjim);
+      } else {
+        console.error("Failed to toggle jjim: Unknown error");
+      }
     } catch (error) {
       console.error("Failed to toggle jjim:", error);
     } finally {
