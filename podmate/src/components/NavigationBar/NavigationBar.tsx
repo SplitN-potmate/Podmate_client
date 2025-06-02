@@ -4,16 +4,29 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { getNotifications } from "../../api/userApi";
 
 interface Notification {
-  id: number;
-  title: string;
-  content: string;
-  createdAt: string;
-  isRead: boolean;
+  notices: {
+    imageUrl: string;
+    noticeType:
+      | "REVIEW_REQUEST"
+      | "PARTICIPATION_REQUEST"
+      | "RECRUITMENT_DONE"
+      | "PAYMENT_COMPLETED"
+      | "ADD_TRACKING_NUM"
+      | "PARTICIPATION_APPROVED"
+      | "PAYMENT_REQUEST"
+      | "ORDER_PLACED"
+      | "DELIVERY_STARTED"
+      | "DELIVERY_ARRIVED";
+    content: string;
+    read: boolean;
+    createdAt: string;
+    relatedUrl: string;
+  }[];
 }
 
 const NavigationBar = (): React.ReactElement => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [notifications, setNotifications] = useState<Notification | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -21,11 +34,93 @@ const NavigationBar = (): React.ReactElement => {
   const fetchNotifications = async () => {
     try {
       setIsLoading(true);
-      const response = await getNotifications();
-      console.log(response);
-      if (response?.data?.result) {
-        setNotifications(response.data.result);
-      }
+      const response: Notification = await getNotifications();
+      // const response = {
+      //   notices: [
+      //     {
+      //       imageUrl: "https://www.google.com",
+      //       noticeType: "REVIEW_REQUEST",
+      //       content: "리뷰를 남겨주세요.",
+      //       read: false,
+      //       createdAt: "2023-01-01T00:00:00.000Z",
+      //       relatedUrl: "https://www.google.com",
+      //     },
+      //     {
+      //       imageUrl: "https://www.google.com",
+      //       noticeType: "PARTICIPATION_REQUEST",
+      //       content: "참여 요청이 도착했습니다!",
+      //       read: false,
+      //       createdAt: "2023-01-01T00:00:00.000Z",
+      //       relatedUrl: null,
+      //     },
+      //     {
+      //       imageUrl: "https://www.google.com",
+      //       noticeType: "RECRUITMENT_DONE",
+      //       content: "모집이 완료 되었습니다",
+      //       read: false,
+      //       createdAt: "2023-01-01T00:00:00.000Z",
+      //       relatedUrl: "https://www.google.com",
+      //     },
+      //     {
+      //       imageUrl: "https://www.google.com",
+      //       noticeType: "PAYMENT_COMPLETED",
+      //       content: "입금이 완료되었습니다",
+      //       read: false,
+      //       createdAt: "2023-01-01T00:00:00.000Z",
+      //       relatedUrl: "https://www.google.com",
+      //     },
+      //     {
+      //       imageUrl: "https://www.google.com",
+      //       noticeType: "ADD_TRACKING_NUM",
+      //       content: "운송장을 입력해 주세요",
+      //       read: false,
+      //       createdAt: "2023-01-01T00:00:00.000Z",
+      //       relatedUrl: "https://www.google.com",
+      //     },
+      //     {
+      //       imageUrl: "https://www.google.com",
+      //       noticeType: "PARTICIPATION_APPROVED",
+      //       content: "신청한 팟에 참여 승인 되었습니다",
+      //       read: false,
+      //       createdAt: "2023-01-01T00:00:00.000Z",
+      //       relatedUrl: "https://www.google.com",
+      //     },
+      //     {
+      //       imageUrl: "https://www.google.com",
+      //       noticeType: "PAYMENT_REQUEST",
+      //       content: "입금을 완료해 주세요",
+      //       read: false,
+      //       createdAt: "2023-01-01T00:00:00.000Z",
+      //       relatedUrl: "https://www.google.com",
+      //     },
+      //     {
+      //       imageUrl: "https://www.google.com",
+      //       noticeType: "ORDER_PLACED",
+      //       content: "주문이 완료되었습니다",
+      //       read: false,
+      //       createdAt: "2023-01-01T00:00:00.000Z",
+      //       relatedUrl: "https://www.google.com",
+      //     },
+      //     {
+      //       imageUrl: "https://www.google.com",
+      //       noticeType: "DELIVERY_STARTED",
+      //       content: "배송이 시작되었습니다",
+      //       read: false,
+      //       createdAt: "2023-01-01T00:00:00.000Z",
+      //       relatedUrl: "https://www.google.com",
+      //     },
+      //     {
+      //       imageUrl: "https://www.google.com",
+      //       noticeType: "DELIVERY_ARRIVED",
+      //       content: "배송이 도착했습니다",
+      //       read: false,
+      //       createdAt: "2023-01-01T00:00:00.000Z",
+      //       relatedUrl: "https://www.google.com",
+      //     },
+      //   ],
+      // } as Notification;
+
+      setNotifications(response);
     } catch (error) {
       console.error("알림을 가져오는데 실패했습니다:", error);
     } finally {
@@ -36,6 +131,45 @@ const NavigationBar = (): React.ReactElement => {
   const handleDrawerOpen = () => {
     setDrawerOpen(true);
     fetchNotifications();
+  };
+
+  const handleNotificationClick = (notice: Notification["notices"][0]) => {
+    setDrawerOpen(false);
+
+    switch (notice.noticeType) {
+      case "REVIEW_REQUEST":
+        navigate("/my/myReviews");
+        break;
+      case "PARTICIPATION_REQUEST":
+        navigate("/my/mypodList");
+        break;
+      case "RECRUITMENT_DONE":
+        navigate("/my/mypodList");
+        break;
+      case "PAYMENT_COMPLETED":
+        navigate("/my/mypodList");
+        break;
+      case "ADD_TRACKING_NUM":
+        navigate("/my/mypodList");
+        break;
+      case "PARTICIPATION_APPROVED":
+        navigate("/my/joinedpodList");
+        break;
+      case "PAYMENT_REQUEST":
+        navigate("/my/joinedpodList");
+        break;
+      case "ORDER_PLACED":
+        navigate("/my/joinedpodList");
+        break;
+      case "DELIVERY_STARTED":
+        navigate("/my/joinedpodList");
+        break;
+      case "DELIVERY_ARRIVED":
+        navigate("/my/joinedpodList");
+        break;
+      default:
+        break;
+    }
   };
 
   const navItems = [
@@ -142,6 +276,7 @@ const NavigationBar = (): React.ReactElement => {
               justifyContent: "space-between",
               alignItems: "center",
               padding: "20px 16px",
+              flexShrink: 0,
             }}
           >
             <h3>알림</h3>
@@ -157,23 +292,22 @@ const NavigationBar = (): React.ReactElement => {
               ×
             </button>
           </div>
-          <div style={{ marginTop: 24, padding: "0 16px" }}>
+          <NotificationContent>
             {isLoading ? (
               <div style={{ textAlign: "center", padding: "20px 0" }}>
                 로딩 중...
               </div>
-            ) : notifications.length > 0 ? (
-              notifications.map((notification) => (
+            ) : notifications && notifications.notices.length > 0 ? (
+              notifications.notices.map((notice, index) => (
                 <NotificationItem
-                  key={notification.id}
-                  isRead={notification.isRead}
+                  key={index}
+                  isRead={notice.read}
+                  onClick={() => handleNotificationClick(notice)}
                 >
-                  <NotificationTitle>{notification.title}</NotificationTitle>
-                  <NotificationContent>
-                    {notification.content}
-                  </NotificationContent>
+                  <NotificationTitle>{notice.noticeType}</NotificationTitle>
+                  <NotificationContent>{notice.content}</NotificationContent>
                   <NotificationTime>
-                    {new Date(notification.createdAt).toLocaleDateString()}
+                    {new Date(notice.createdAt).toLocaleDateString()}
                   </NotificationTime>
                 </NotificationItem>
               ))
@@ -182,7 +316,7 @@ const NavigationBar = (): React.ReactElement => {
                 알림이 없습니다
               </div>
             )}
-          </div>
+          </NotificationContent>
         </NotificationDrawer>
       </NotificationDrawerContainer>
       <NavContainer>
@@ -296,7 +430,7 @@ const NotificationDrawerContainer = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  width: 250px;
+  width: 300px;
   height: 844px;
   overflow: hidden;
 `;
@@ -305,7 +439,7 @@ const NotificationDrawer = styled.div<{ open: boolean }>`
   position: absolute;
   top: 0;
   right: 0;
-  width: 250px;
+  width: 300px;
   height: 844px;
   background: #fff;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
@@ -314,7 +448,6 @@ const NotificationDrawer = styled.div<{ open: boolean }>`
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
-  // padding: 24px 16px;
 `;
 
 const DrawerBackdrop = styled.div<{ open: boolean }>`
@@ -349,9 +482,27 @@ const NotificationTitle = styled.div`
 `;
 
 const NotificationContent = styled.div`
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 8px;
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 24px;
+  padding: 0 16px;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 `;
 
 const NotificationTime = styled.div`

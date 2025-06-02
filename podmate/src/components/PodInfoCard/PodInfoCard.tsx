@@ -2,7 +2,7 @@ import styled, { keyframes } from "styled-components";
 import { PodProps, PodDetail } from "../../types/types";
 import HeartShape from "../HeartShape";
 import { useState, useEffect } from "react";
-import { postJjim, getPodDetail, patchJjim } from "../../api/userApi";
+import { postJjim, getPodDetail, patchJjim, getUser } from "../../api/userApi";
 import { useNavigate } from "react-router-dom";
 
 interface PodInfoCardProps {
@@ -17,13 +17,21 @@ const PodInfoCard = ({ selectedPod, type }: PodInfoCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [podDetail, setPodDetail] = useState<PodDetail | null>(null);
   const [isLoadingDetail, setIsLoadingDetail] = useState(false);
+  const [isLeader, setIsLeader] = useState(false);
 
   useEffect(() => {
     const fetchPodDetail = async () => {
       if (isExpanded && selectedPod.podId && !podDetail) {
         setIsLoadingDetail(true);
         const detail = await getPodDetail(selectedPod.podId);
+
         setPodDetail(detail);
+        if (detail.podLeader.userId) {
+          const myId = await getUser();
+          if (myId.userId === detail.podLeader.userId) {
+            setIsLeader(true);
+          }
+        }
         setIsLoadingDetail(false);
       }
     };
@@ -131,23 +139,25 @@ const PodInfoCard = ({ selectedPod, type }: PodInfoCardProps) => {
         )}
         <PodInfoLine isUpper={true}>
           <div></div>
-          <PodJoinButton onClick={handleJoinClick}>
-            참여하기
-            <svg
-              width="12"
-              height="12"
-              viewBox="0 0 12 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M6 2.5L9.5 6M9.5 6L6 9.5M9.5 6L2.5 6"
-                stroke="white"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </PodJoinButton>
+          {isLeader! && (
+            <PodJoinButton onClick={handleJoinClick}>
+              참여하기
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 2.5L9.5 6M9.5 6L6 9.5M9.5 6L2.5 6"
+                  stroke="white"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </PodJoinButton>
+          )}
         </PodInfoLine>
       </ExpandedContent>
 

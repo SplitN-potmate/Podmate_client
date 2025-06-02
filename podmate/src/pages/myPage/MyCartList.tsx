@@ -19,6 +19,7 @@ export default function MyCartList() {
   const getCartsData = async () => {
     try {
       const res = await getCarts();
+      console.log("res", res);
       console.log("res", res.result.platformDtos);
       setCartList(res.result.platformDtos);
     } catch {}

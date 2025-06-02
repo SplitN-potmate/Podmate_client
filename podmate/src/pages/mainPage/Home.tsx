@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import styled from "@emotion/styled";
-import { getPods, testUser } from "../../api/userApi";
+import { getPods, getUser } from "../../api/userApi";
 import { PodProps, MapState, MapBounds } from "../../types/types";
 import PodInfoCard from "../../components/PodInfoCard/PodInfoCard";
 import PodListModal from "../../components/PodList/PodListModal";
@@ -40,9 +40,8 @@ const Home = (): React.ReactElement => {
   mapStateRef.current = mapState;
   const [showPodList, setShowPodList] = useState(false);
 
-  //test User2
   useEffect(() => {
-    testUser();
+    const user = getUser();
   });
 
   // 지도 초기화 함수
@@ -538,7 +537,7 @@ export default Home;
 
 const MapContainer = styled.div`
   width: 100%;
-  height: 702px; //812-50-60
+  height: 732px; //812-50-60
   position: relative;
   margin-top: 50px;
 `;
