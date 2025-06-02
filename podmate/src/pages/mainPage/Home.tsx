@@ -492,16 +492,6 @@ const Home = (): React.ReactElement => {
         }
       }}
     >
-      {mapState.currentAddress.main && (
-        <>
-          <AddressInfo>
-            <AddressLine>{mapState.currentAddress.main}</AddressLine>
-            {mapState.currentAddress.sub && (
-              <SubAddressLine>{mapState.currentAddress.sub}</SubAddressLine>
-            )}
-          </AddressInfo>
-        </>
-      )}
       {mapState.selectedPod && (
         <PodInfoCard type="modal" selectedPod={mapState.selectedPod} />
       )}

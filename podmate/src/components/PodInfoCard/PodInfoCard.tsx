@@ -24,7 +24,6 @@ const PodInfoCard = ({ selectedPod, type }: PodInfoCardProps) => {
   const [podDetail, setPodDetail] = useState<PodDetail | null>(null);
   const [isLoadingDetail, setIsLoadingDetail] = useState(false);
   const [isLeader, setIsLeader] = useState(false);
-
   useEffect(() => {
     const fetchPodDetail = async () => {
       if (isExpanded && selectedPod.podId && !podDetail) {
@@ -78,7 +77,6 @@ const PodInfoCard = ({ selectedPod, type }: PodInfoCardProps) => {
       }
     }
   };
-  console.log(isLeader);
   return (
     <PodInfoOverlay type={type} onClick={(e) => e.stopPropagation()}>
       <PodInfoContent>

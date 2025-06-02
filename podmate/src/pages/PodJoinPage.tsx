@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import Header from "../components/Header";
 import { useState, useEffect } from "react";
-import { getPodDetail } from "../api/userApi";
+import { getPodDetail, postPodJoin } from "../api/userApi";
 import { PodDetail } from "../types/types";
 
 const Container = styled.div`
@@ -125,6 +125,61 @@ const InputInfo = styled.div<InputInfoProps>`
   margin-top: 4px;
 `;
 
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+const ModalContent = styled.div`
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  width: 280px;
+  text-align: center;
+  animation: ${keyframes`
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  `} 0.3s ease-out;
+`;
+
+const ModalTitle = styled.h3`
+  font-size: 18px;
+  font-weight: 600;
+  color: #2f3337;
+  margin-bottom: 16px;
+`;
+
+const ModalButton = styled.button`
+  width: 100%;
+  padding: 12px;
+  background: #52d4e0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 16px;
+
+  &:hover {
+    background: #33bbff;
+  }
+`;
+
 export default function PodJoinPage() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -134,6 +189,9 @@ export default function PodJoinPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [quantity, setQuantity] = useState<number>(0);
   const [amount, setAmount] = useState<string>("");
+  const [showModal, setShowModal] = useState(false);
+  const [isJoining, setIsJoining] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPodDetail = async () => {
@@ -158,7 +216,7 @@ export default function PodJoinPage() {
 
   const getRemainingQuantity = () => {
     if (!podDetail) return 0;
-    return Math.floor(getRemainingAmount() / podDetail.unitPrice);
+    return Math.floor(podDetail.goalAmount - podDetail.currentAmount);
   };
 
   const isExceedingGoal = () => {
@@ -166,15 +224,32 @@ export default function PodJoinPage() {
     if (pathname.startsWith("/pod/join/mini")) {
       return Number(amount) > getRemainingAmount();
     } else {
-      return quantity * podDetail.unitPrice > getRemainingAmount();
+      return quantity > getRemainingAmount();
     }
   };
 
-  const handleJoin = () => {
-    if (isExceedingGoal()) {
+  const handleJoin = async () => {
+    if (isExceedingGoal() || !podId) {
       return;
     }
 
+    try {
+      setIsJoining(true);
+      setError(null);
+
+      const res = await postPodJoin(podId, quantity);
+      console.log(res);
+      setShowModal(true);
+    } catch (err) {
+      console.error("Failed to join pod:", err);
+      setShowModal(true);
+    } finally {
+      setIsJoining(false);
+    }
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
     navigate("/");
   };
 
@@ -257,11 +332,26 @@ export default function PodJoinPage() {
 
         <JoinButton
           onClick={handleJoin}
-          disabled={isExceedingGoal() || !amount || Number(amount) === 0}
+          disabled={
+            isExceedingGoal() || !amount || Number(amount) === 0 || isJoining
+          }
         >
-          참여 신청하기
+          {isJoining ? "참여 중..." : "참여 신청하기"}
         </JoinButton>
       </Container>
+      {error && (
+        <ErrorMessage style={{ textAlign: "center", marginTop: "16px" }}>
+          {error}
+        </ErrorMessage>
+      )}
+      {showModal && (
+        <ModalOverlay>
+          <ModalContent>
+            <ModalTitle>신청이 완료되었습니다!</ModalTitle>
+            <ModalButton onClick={handleModalClose}>확인</ModalButton>
+          </ModalContent>
+        </ModalOverlay>
+      )}
     </>
   ) : (
     <>
@@ -316,7 +406,7 @@ export default function PodJoinPage() {
           <InputInfo isError={isExceedingGoal()}>
             {isExceedingGoal() && (
               <ErrorMessage>
-                목표 금액을 초과했습니다. 남은 수량: {getRemainingQuantity()}개
+                목표 수량을 초과했습니다. 남은 수량: {getRemainingQuantity()}개
               </ErrorMessage>
             )}
           </InputInfo>
@@ -324,11 +414,24 @@ export default function PodJoinPage() {
 
         <JoinButton
           onClick={handleJoin}
-          disabled={isExceedingGoal() || quantity === 0}
+          disabled={isExceedingGoal() || quantity === 0 || isJoining}
         >
-          참여 신청하기
+          {isJoining ? "참여 중..." : "참여 신청하기"}
         </JoinButton>
       </Container>
+      {error && (
+        <ErrorMessage style={{ textAlign: "center", marginTop: "16px" }}>
+          {error}
+        </ErrorMessage>
+      )}
+      {showModal && (
+        <ModalOverlay>
+          <ModalContent>
+            <ModalTitle>신청이 완료되었습니다!</ModalTitle>
+            <ModalButton onClick={handleModalClose}>확인</ModalButton>
+          </ModalContent>
+        </ModalOverlay>
+      )}
     </>
   );
 }
