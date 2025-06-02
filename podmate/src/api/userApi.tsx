@@ -32,7 +32,6 @@ export const getUser = async () => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    console.log("res", res.data.result);
     return res.data.result;
   } catch {}
 };
@@ -640,5 +639,27 @@ export const postOrderForm = async (podId: number, items: number[]) => {
   } catch (error) {
     console.error("Failed to fetch pod detail:", error);
     return null;
+  }
+};
+
+//팟 참여 api
+export const postPodJoin = async (podId: number, quantity: number) => {
+  const accessToken = localStorage.getItem("accessToken");
+  try {
+    const res = await userAxios.post(
+      `/api/pods/${podId}/join`,
+      {
+        quantity: quantity,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return res.data.result;
+  } catch (error) {
+    console.error("Failed to fetch pod detail:", error);
+    throw error;
   }
 };
