@@ -15,6 +15,10 @@ import MyCart from './components/mypage/MyCart';
 import MyCartList from './pages/myPage/MyCartList';
 import MyReviewList from './components/mypage/MyReviewList';
 import MyCartItems from './components/mypage/MyCartItems';
+import PodJoinPage from './pages/PodJoinPage';
+import ReviewPage from './pages/review/ReviewPage';
+import PodMember from './components/mypage/PodMember';
+import MemberOrder from './components/mypage/MemberOrder';
 
 const BackGround = styled.div`
     background-color: #cccccc;
@@ -26,18 +30,31 @@ const BackGround = styled.div`
 
 const MobileFrame = styled.div`
     position: relative;
-    width: 375px;
-    height: 812px;
+    width: 390px;
+    height: 844px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    overflow: auto;
-    /* padding-bottom: 60px; */
-    /* 스크롤바 숨기기 */
+    display: flex;
+    flex-direction: column;
+    /** 
+
     &::-webkit-scrollbar {
         display: none;
     }
+				*/
+    /* 
     -ms-overflow-style: none; /* IE, Edge */
-    scrollbar-width: none; /* Firefox */
+    /*   scrollbar-width: none; Firefox */
+`;
+
+const Content = styled.div`
+    flex: 1;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `;
 
 // 내부 라우팅과 NavigationBar 조건 렌더링
@@ -60,8 +77,13 @@ const AppRoutes = () => {
                 <Route path="/my/cart" element={<MyCart />} />
                 <Route path="/my/cartItems" element={<MyCartItems />} />
                 <Route path="/my/myReviews" element={<MyReviewList />} />
+                <Route path="/my/pod/members" element={<PodMember />} />
                 <Route path="/register/minAmountPod" element={<PodRegister />} />
                 <Route path="/register/groupBuyPod" element={<PodRegisterGroupBuy />} />
+                <Route path="/review" element={<ReviewPage />} />
+                <Route path="/pod/join/mini" element={<PodJoinPage />} />
+                <Route path="/pod/join/group" element={<PodJoinPage />} />
+                <Route path="/member/order" element={<MemberOrder />} />
             </Routes>
             {!hideNav && <NavigationBar />}
         </>
@@ -73,7 +95,9 @@ const App = () => {
         <Router>
             <BackGround>
                 <MobileFrame>
-                    <AppRoutes />
+                    <Content>
+                        <AppRoutes />
+                    </Content>
                 </MobileFrame>
             </BackGround>
         </Router>

@@ -1,0 +1,99 @@
+.pm_container {
+    margin: 10px 20px;
+    overflow: auto;
+}
+
+.pm_button_active {
+    width: 167.5px;
+    height: 41px;
+    border: 1px solid #52d4e0;
+    border-radius: 5px;
+    background-color: white;
+    color: #52d4e0;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pm_button {
+    width: 100px;
+    height: 33px;
+    border: none;
+    border-radius: 5px;
+    background-color: #52d4e0;
+    color: white;
+    font-size: 13px;
+    font-weight: 400;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pm_title_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    height: 40px;
+    justify-content: space-between;
+}
+
+.pm_title_div {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.pm_bottom_div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pm_title {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+    margin-right: 5px;
+}
+
+.manner-badge {
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 8px;
+    color: white;
+    /* font-weight: bold; */
+}
+
+.manner-5 {
+    background-color: #4caf50;
+}
+.manner-4 {
+    background-color: #66bb6a;
+}
+.manner-3 {
+    background-color: #ffb300;
+}
+.manner-2 {
+    background-color: #f44336;
+}
+.manner-1 {
+    background-color: #d32f2f;
+}
+
+.pm_totalAmount {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.pm_select {
+    margin-left: auto;
+    padding: 6px;
+    border-radius: 2px;
+    font-size: 14px;
+    background-color: white;
+    border: none;
+    font-size: 16px;
+}

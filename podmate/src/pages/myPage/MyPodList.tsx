@@ -74,6 +74,7 @@ export default function MyPodList() {
                                   goalAmount={pod.goalAmount}
                                   jjim={pod.jjim}
                                   platform={pod.platform}
+                                  inprogressStatus={pod.inprogressStatus}
                               />
                           ))
                         : ''}

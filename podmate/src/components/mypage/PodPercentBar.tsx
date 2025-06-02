@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface PrecentBarProps {
     percentage: number;
@@ -35,7 +35,12 @@ const interpolateColor = (start: string, end: string, percentage: number) => {
 const PodPercentBar: React.FC<PrecentBarProps> = ({ percentage }) => {
     const startColor = '#52D4E0';
     const endColor = '#33BBFF';
-    const currentColor = interpolateColor(startColor, endColor, percentage);
+    const [percent, setPercent] = useState<number>(Math.min(percentage, 100));
+    const currentColor = interpolateColor(startColor, endColor, percent);
+
+    useEffect(() => {
+        setPercent(Math.min(percentage, 100));
+    }, [percentage]);
 
     return (
         <div
@@ -49,7 +54,7 @@ const PodPercentBar: React.FC<PrecentBarProps> = ({ percentage }) => {
         >
             <div
                 style={{
-                    width: `${percentage}%`,
+                    width: `${percent}%`,
                     height: '100%',
                     backgroundColor: currentColor,
                     transition: 'width 0.3s ease, background-color 0.3s ease',
