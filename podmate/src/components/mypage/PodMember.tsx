@@ -103,7 +103,7 @@ export default function PodMember() {
                                 <p className="pm_totalAmount">{amountLabel}</p>
 
                                 <button className="pm_button" onClick={() => onClickMemberOrder(userId, podId)}>
-                                    프로필 보러가기
+                                    주문서 보러가기
                                 </button>
                             </div>
                         </div>
