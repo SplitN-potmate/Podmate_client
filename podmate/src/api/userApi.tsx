@@ -15,21 +15,38 @@ const userAxios = axios.create({
   },
 });
 
-export const kakaoLogin = async () => {
+// export const testUser = async () => {
+//   const res = await userAxios.get("/api/auth/test-token?userId=2");
+//   const accessToken = res.data.accessToken;
+//   const refreshToken = res.data.refreshToken;
+//   localStorage.setItem("accessToken", accessToken);
+//   localStorage.setItem("refreshToken", refreshToken);
+//   return res.data;
+// };
+
+export const getUser = async () => {
+  const accessToken = localStorage.getItem("accessToken");
   try {
-    const res = await userAxios.post("/oauth2/authorization/kakao");
-    return res.data;
+    const res = await userAxios.get(`/api/users/me`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    console.log("res", res.data.result);
+    return res.data.result;
   } catch {}
 };
-
-export const testUser = async () => {
-  const res = await userAxios.get("/api/auth/test-token?userId=2");
-  console.log(res.data);
-  const accessToken = res.data.accessToken;
-  const refreshToken = res.data.refreshToken;
-  localStorage.setItem("accessToken", accessToken);
-  localStorage.setItem("refreshToken", refreshToken);
-  return res.data;
+export const getUserProfile = async (userId: number) => {
+  const accessToken = localStorage.getItem("accessToken");
+  try {
+    const res = await userAxios.get(`/api/users/${userId}/profile`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    console.log("res", res.data.result);
+    return res.data.result;
+  } catch {}
 };
 
 //팟 목록 조회
@@ -41,6 +58,7 @@ export const getPodList = async () => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
+    console.log("res", res.data.result);
     return res.data.result;
   } catch {}
 };
@@ -440,7 +458,7 @@ export const getNotifications = async () => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    return res;
+    return res.data.result;
   } catch (error) {
     console.error("실패:", error);
     return null;
